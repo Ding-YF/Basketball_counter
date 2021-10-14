@@ -29,7 +29,7 @@
       <CLK51>24000000</CLK51>
       <OPTTT>
         <gFlags>1</gFlags>
-        <BeepAtEnd>1</BeepAtEnd>
+        <BeepAtEnd>0</BeepAtEnd>
         <RunSim>1</RunSim>
         <RunTarget>0</RunTarget>
         <RunAbUc>0</RunAbUc>
