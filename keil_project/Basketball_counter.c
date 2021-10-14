@@ -114,7 +114,7 @@ void keyscan()
 {
     if (key_att==0)
     {
-        delayms(5);
+        delayms(1);
         if(key_att==0)
         att=24;
         while(!key_att);
@@ -123,14 +123,14 @@ void keyscan()
     {
         if (score_1==0)
         {
-            delayms(5);
+            delayms(1);
             if (score_1==0)
             Lakers_score+=1;
             while(!score_1);
         }
         if (score_2==0)
         {
-            delayms(5);
+            delayms(1);
             if (score_2==0)
             Lakers_score+=2;
             while(!score_2);
@@ -138,7 +138,7 @@ void keyscan()
         }
         if (score_3==0)
         {
-            delayms(5);
+            delayms(1);
             if (score_3==0)
             Lakers_score+=3;
             while(!score_3);

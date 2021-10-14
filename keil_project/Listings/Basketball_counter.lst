@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 20:50:08 PAGE 1   
+C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 21:01:56 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE BASKETBALL_COUNTER
@@ -11,7 +11,7 @@ line level    source
    1          #include <reg51.h>
    2          #define uint  unsigned int
    3          unsigned char table0[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
-   4          char sec=5,min=0;att=24;
+   4          char sec=0,min=10;att=24;
    5          char m=0;
    6          char Lakers_score=0;
    7          char Warrior_score=0;
@@ -62,7 +62,7 @@ line level    source
   52   1          delayms(1);
   53   1      
   54   1          HLA=1;HLB=1;HLC=0;  //第4位
-C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 20:50:08 PAGE 2   
+C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 21:01:56 PAGE 2   
 
   55   1          P0=table0[secge];
   56   1          delayms(1);
@@ -126,9 +126,9 @@ line level    source
  114          {
  115   1          if (key_att==0)
  116   1          {
-C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 20:50:08 PAGE 3   
+C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 21:01:56 PAGE 3   
 
- 117   2              delayms(5);
+ 117   2              delayms(1);
  118   2              if(key_att==0)
  119   2              att=24;
  120   2              while(!key_att);
@@ -137,14 +137,14 @@ line level    source
  123   1          {
  124   2              if (score_1==0)
  125   2              {
- 126   3                  delayms(5);
+ 126   3                  delayms(1);
  127   3                  if (score_1==0)
  128   3                  Lakers_score+=1;
  129   3                  while(!score_1);
  130   3              }
  131   2              if (score_2==0)
  132   2              {
- 133   3                  delayms(5);
+ 133   3                  delayms(1);
  134   3                  if (score_2==0)
  135   3                  Lakers_score+=2;
  136   3                  while(!score_2);
@@ -152,7 +152,7 @@ line level    source
  138   3              }
  139   2              if (score_3==0)
  140   2              {
- 141   3                  delayms(5);
+ 141   3                  delayms(1);
  142   3                  if (score_3==0)
  143   3                  Lakers_score+=3;
  144   3                  while(!score_3);
@@ -190,7 +190,7 @@ line level    source
  176   1          TMOD=0x01;
  177   1          TH0=0x3c;
  178   1          TL0=0xb0;
-C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 20:50:08 PAGE 4   
+C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 21:01:56 PAGE 4   
 
  179   1          EA=1;
  180   1          ET0=1;
@@ -243,7 +243,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    646    ----
+   CODE SIZE        =    630    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
