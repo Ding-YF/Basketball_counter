@@ -1,0 +1,121 @@
+C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 08:43:15 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE BASKETBALL_COUNTER
+OBJECT MODULE PLACED IN .\Objects\Basketball_counter.obj
+COMPILER INVOKED BY: D:\rj\Keil_v5\C51\BIN\C51.EXE Basketball_counter.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
+                    -T(.\Listings\Basketball_counter.lst) TABS(2) OBJECT(.\Objects\Basketball_counter.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #define uint  unsigned int
+   3          unsigned char table0[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
+   4          static uint n,sec,min;
+   5          char m=0;
+   6          
+   7          sbit HLA=P1^0;
+   8          sbit HLB=P1^1;
+   9          sbit HLC=P1^2;
+  10          
+  11          void delayms(uint xms)
+  12          {
+  13   1        uint i,j;
+  14   1        for(i=xms;i>0;i--)
+  15   1          for(j=110;j>0;j--);
+  16   1      
+  17   1      }
+  18          
+  19          void display()
+  20          {
+  21   1          unsigned char secshi,secge,minshi,minge;
+  22   1          secge=sec%10;
+  23   1          secshi=sec/10;
+  24   1          minge=min%10;
+  25   1          minshi=min/10;
+  26   1          HLA=0;HLB=0;HLC=0; //第1位
+  27   1          P0=table0[minshi];
+  28   1          delayms(10);
+  29   1      
+  30   1          HLA=1;HLB=0;HLC=0;  //第2位
+  31   1          P0=table0[minge];
+  32   1          delayms(10);
+  33   1      
+  34   1          HLA=0;HLB=1;HLC=0;  //第3位
+  35   1          P0=table0[secshi];
+  36   1          delayms(10);
+  37   1      
+  38   1          HLA=1;HLB=1;HLC=0;  //第4位
+  39   1          P0=table0[secge];
+  40   1          delayms(10);
+  41   1      
+  42   1      }
+  43          
+  44          void init()//初始化
+  45          {
+  46   1          TMOD=0x01;
+  47   1          TH0=0x3c;
+  48   1          TL0=0xb0;
+  49   1          EA=1;
+  50   1          ET0=1;
+  51   1          TR0=1;
+  52   1      }
+  53          
+  54          
+C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 08:43:15 PAGE 2   
+
+  55          void Time_0() interrupt 1  //定时器0
+  56          {
+  57   1          TH0=0x3c;
+  58   1          TL0=0xb0;
+  59   1      //    m++;
+  60   1      //    if(m>=20)
+  61   1      //    {
+  62   1      //
+  63   1      //        m=0;
+  64   1      //    }
+  65   1      //}
+  66   1          m++;
+  67   1          if (m>=20)
+  68   1          {
+  69   2              m=0;
+  70   2              sec++;
+  71   2              P2=~P2;
+  72   2              if(sec==60)
+  73   2              {
+  74   3                  sec=0;
+  75   3                  min++;
+  76   3                  if (min==60)
+  77   3                  {
+  78   4                  min=0;
+  79   4                  }
+  80   3              }
+  81   2          }
+  82   1      }
+  83          
+  84          
+  85          void main()
+  86          {
+  87   1          init();
+  88   1          P2=0x00;
+  89   1        while(1)
+  90   1        {
+  91   2            display();
+  92   2            //display();
+  93   2        }
+  94   1      } 
+  95          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    260    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     17       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
