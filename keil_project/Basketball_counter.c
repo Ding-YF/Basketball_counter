@@ -1,7 +1,7 @@
 #include <reg51.h>
 #define uint  unsigned int
 unsigned char table0[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
-char sec=0,min=2;att=24;
+char sec=5,min=0;att=24;
 char m=0;
 char Lakers_score=0;
 char Warrior_score=0;
@@ -92,12 +92,22 @@ void display_score()
     P0=0x00;
 }
 
+void light_falsh()
+{
+    LED=~LED;
+    delayms(50);
+}
+
 void speak()
 {
+    if (sec==0&&min==0)
+    {
+        att=0;
+    }
     if (att==0)
-        {
-            BEEP=!BEEP;
-        }
+    {
+        BEEP=!BEEP;
+    }
 }
 
 void keyscan()
@@ -106,7 +116,6 @@ void keyscan()
     {
         delayms(5);
         if(key_att==0)
-        LED=!LED;
         att=24;
         while(!key_att);
     }
@@ -195,6 +204,7 @@ void Time_0() interrupt 1  //定时器0
             {
             min=0;
             sec=0;
+            light_falsh();
             }
         }
     }
@@ -204,7 +214,7 @@ void Time_0() interrupt 1  //定时器0
 void main()
 {
     init();
-    //P2=0x04;
+    LED=1;
 	while(1)
 	{
 	    display();

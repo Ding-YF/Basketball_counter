@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 19:43:38 PAGE 1   
+C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 20:50:08 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE BASKETBALL_COUNTER
@@ -11,7 +11,7 @@ line level    source
    1          #include <reg51.h>
    2          #define uint  unsigned int
    3          unsigned char table0[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
-   4          char sec=0,min=2;att=24;
+   4          char sec=5,min=0;att=24;
    5          char m=0;
    6          char Lakers_score=0;
    7          char Warrior_score=0;
@@ -62,7 +62,7 @@ line level    source
   52   1          delayms(1);
   53   1      
   54   1          HLA=1;HLB=1;HLC=0;  //第4位
-C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 19:43:38 PAGE 2   
+C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 20:50:08 PAGE 2   
 
   55   1          P0=table0[secge];
   56   1          delayms(1);
@@ -104,136 +104,146 @@ line level    source
   92   1          P0=0x00;
   93   1      }
   94          
-  95          void speak()
+  95          void light_falsh()
   96          {
-  97   1          if (att==0)
-  98   1              {
-  99   2                  BEEP=!BEEP;
- 100   2              }
- 101   1      }
- 102          
- 103          void keyscan()
- 104          {
- 105   1          if (key_att==0)
- 106   1          {
- 107   2              delayms(5);
- 108   2              if(key_att==0)
- 109   2              LED=!LED;
- 110   2              att=24;
- 111   2              while(!key_att);
- 112   2          }
- 113   1          if (Change==1)
- 114   1          {
- 115   2              if (score_1==0)
- 116   2              {
-C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 19:43:38 PAGE 3   
+  97   1          LED=~LED;
+  98   1          delayms(50);
+  99   1      }
+ 100          
+ 101          void speak()
+ 102          {
+ 103   1          if (sec==0&&min==0)
+ 104   1          {
+ 105   2              att=0;
+ 106   2          }
+ 107   1          if (att==0)
+ 108   1          {
+ 109   2              BEEP=!BEEP;
+ 110   2          }
+ 111   1      }
+ 112          
+ 113          void keyscan()
+ 114          {
+ 115   1          if (key_att==0)
+ 116   1          {
+C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 20:50:08 PAGE 3   
 
- 117   3                  delayms(5);
- 118   3                  if (score_1==0)
- 119   3                  Lakers_score+=1;
- 120   3                  while(!score_1);
- 121   3              }
- 122   2              if (score_2==0)
- 123   2              {
- 124   3                  delayms(5);
- 125   3                  if (score_2==0)
- 126   3                  Lakers_score+=2;
- 127   3                  while(!score_2);
- 128   3      
- 129   3              }
- 130   2              if (score_3==0)
- 131   2              {
- 132   3                  delayms(5);
- 133   3                  if (score_3==0)
- 134   3                  Lakers_score+=3;
- 135   3                  while(!score_3);
- 136   3              }
- 137   2          }
- 138   1          else
- 139   1          {
- 140   2              if (score_1==0)
- 141   2              {
- 142   3                  delayms(5);
- 143   3                  if (score_1==0)
- 144   3                  Warrior_score+=1;
- 145   3                  while(!score_1);
- 146   3              }
- 147   2              if (score_2==0)
- 148   2              {
- 149   3                  delayms(5);
- 150   3                  if (score_2==0)
- 151   3                  Warrior_score+=2;
- 152   3                  while(!score_2);
- 153   3      
- 154   3              }
- 155   2              if (score_3==0)
- 156   2              {
- 157   3                  delayms(5);
- 158   3                  if (score_3==0)
- 159   3                  Warrior_score+=3;
- 160   3                  while(!score_3);
- 161   3              }
- 162   2          }
- 163   1      }
- 164          
- 165          void init()//初始化
- 166          {
- 167   1          TMOD=0x01;
- 168   1          TH0=0x3c;
- 169   1          TL0=0xb0;
- 170   1          EA=1;
- 171   1          ET0=1;
- 172   1          TR0=1;
- 173   1      }
- 174          
- 175          
- 176          void Time_0() interrupt 1  //定时器0
- 177          {
- 178   1          TH0=0x3c;
-C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 19:43:38 PAGE 4   
+ 117   2              delayms(5);
+ 118   2              if(key_att==0)
+ 119   2              att=24;
+ 120   2              while(!key_att);
+ 121   2          }
+ 122   1          if (Change==1)
+ 123   1          {
+ 124   2              if (score_1==0)
+ 125   2              {
+ 126   3                  delayms(5);
+ 127   3                  if (score_1==0)
+ 128   3                  Lakers_score+=1;
+ 129   3                  while(!score_1);
+ 130   3              }
+ 131   2              if (score_2==0)
+ 132   2              {
+ 133   3                  delayms(5);
+ 134   3                  if (score_2==0)
+ 135   3                  Lakers_score+=2;
+ 136   3                  while(!score_2);
+ 137   3      
+ 138   3              }
+ 139   2              if (score_3==0)
+ 140   2              {
+ 141   3                  delayms(5);
+ 142   3                  if (score_3==0)
+ 143   3                  Lakers_score+=3;
+ 144   3                  while(!score_3);
+ 145   3              }
+ 146   2          }
+ 147   1          else
+ 148   1          {
+ 149   2              if (score_1==0)
+ 150   2              {
+ 151   3                  delayms(5);
+ 152   3                  if (score_1==0)
+ 153   3                  Warrior_score+=1;
+ 154   3                  while(!score_1);
+ 155   3              }
+ 156   2              if (score_2==0)
+ 157   2              {
+ 158   3                  delayms(5);
+ 159   3                  if (score_2==0)
+ 160   3                  Warrior_score+=2;
+ 161   3                  while(!score_2);
+ 162   3      
+ 163   3              }
+ 164   2              if (score_3==0)
+ 165   2              {
+ 166   3                  delayms(5);
+ 167   3                  if (score_3==0)
+ 168   3                  Warrior_score+=3;
+ 169   3                  while(!score_3);
+ 170   3              }
+ 171   2          }
+ 172   1      }
+ 173          
+ 174          void init()//初始化
+ 175          {
+ 176   1          TMOD=0x01;
+ 177   1          TH0=0x3c;
+ 178   1          TL0=0xb0;
+C51 COMPILER V9.60.0.0   BASKETBALL_COUNTER                                                10/14/2021 20:50:08 PAGE 4   
 
- 179   1          TL0=0xb0;
- 180   1          m++;
- 181   1          if (m>=20)
- 182   1          {
- 183   2              m=0;
- 184   2              sec--;
- 185   2              att--;
- 186   2              if (att<0)
- 187   2              {
- 188   3                  att=0;
- 189   3              }
- 190   2              if(sec<=0)
- 191   2              {
- 192   3                  min--;
- 193   3                  sec=59;
- 194   3                  if (min<0)
- 195   3                  {
- 196   4                  min=0;
- 197   4                  sec=0;
- 198   4                  }
- 199   3              }
- 200   2          }
- 201   1      }
- 202          
- 203          
- 204          void main()
- 205          {
- 206   1          init();
- 207   1          //P2=0x04;
- 208   1        while(1)
- 209   1        {
- 210   2            display();
- 211   2            display_score();
- 212   2            keyscan();
- 213   2            speak();
- 214   2        }
- 215   1      } 
- 216          
+ 179   1          EA=1;
+ 180   1          ET0=1;
+ 181   1          TR0=1;
+ 182   1      }
+ 183          
+ 184          
+ 185          void Time_0() interrupt 1  //定时器0
+ 186          {
+ 187   1          TH0=0x3c;
+ 188   1          TL0=0xb0;
+ 189   1          m++;
+ 190   1          if (m>=20)
+ 191   1          {
+ 192   2              m=0;
+ 193   2              sec--;
+ 194   2              att--;
+ 195   2              if (att<0)
+ 196   2              {
+ 197   3                  att=0;
+ 198   3              }
+ 199   2              if(sec<=0)
+ 200   2              {
+ 201   3                  min--;
+ 202   3                  sec=59;
+ 203   3                  if (min<0)
+ 204   3                  {
+ 205   4                  min=0;
+ 206   4                  sec=0;
+ 207   4                  light_falsh();
+ 208   4                  }
+ 209   3              }
+ 210   2          }
+ 211   1      }
+ 212          
+ 213          
+ 214          void main()
+ 215          {
+ 216   1          init();
+ 217   1          LED=1;
+ 218   1        while(1)
+ 219   1        {
+ 220   2            display();
+ 221   2            display_score();
+ 222   2            keyscan();
+ 223   2            speak();
+ 224   2        }
+ 225   1      } 
+ 226          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    604    ----
+   CODE SIZE        =    646    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
