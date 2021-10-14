@@ -1,7 +1,7 @@
 #include <reg51.h>
 #define uint  unsigned int
 unsigned char table0[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
-char sec=5,min=0;att=24;
+char sec=0,min=10;att=24;
 char m=0;
 char Lakers_score=0;
 char Warrior_score=0;
