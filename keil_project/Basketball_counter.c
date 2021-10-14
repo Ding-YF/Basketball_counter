@@ -1,12 +1,13 @@
 #include <reg51.h>
 #define uint  unsigned int
 unsigned char table0[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
-static uint n,sec,min;
+char sec=12,min=0;att=24;
 char m=0;
 
 sbit HLA=P1^0;
 sbit HLB=P1^1;
 sbit HLC=P1^2;
+sbit BEEP=P1^4;
 
 void delayms(uint xms)
 {
@@ -41,6 +42,16 @@ void display()
 
 }
 
+void speak()
+{
+    if (sec>=9&&sec<=10&&min==0)
+        {
+            BEEP=!BEEP;
+//            delayms(2000);
+//            BEEP=1;
+        }
+}
+
 void init()//初始化
 {
     TMOD=0x01;
@@ -60,15 +71,16 @@ void Time_0() interrupt 1  //定时器0
     if (m>=20)
     {
         m=0;
-        sec++;
+        sec--;
         P2=~P2;
-        if(sec==60)
+        if(sec<=0)
         {
-            sec=0;
-            min++;
-            if (min==60)
+            min--;
+            sec=59;
+            if (min<0)
             {
-            min=0;
+            min=2;
+            sec=0;
             }
         }
     }
@@ -82,6 +94,7 @@ void main()
 	while(1)
 	{
 	    display();
+	    speak();
 	}
 } 
 

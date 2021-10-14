@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    10/14/2021  08:43:15  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    10/14/2021  11:34:33  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -13,7 +13,7 @@ INPUT MODULES INCLUDED:
   .\Objects\STARTUP.obj (?C_STARTUP)
   .\Objects\Basketball_counter.obj (BASKETBALL_COUNTER)
   D:\RJ\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
-  D:\RJ\KEIL_V5\C51\LIB\C51S.LIB (?C?UIDIV)
+  D:\RJ\KEIL_V5\C51\LIB\C51S.LIB (?C?SCDIV)
 
 
 LINK MAP OF MODULE:  .\Objects\Basketball_counter (?C_STARTUP)
@@ -24,9 +24,8 @@ LINK MAP OF MODULE:  .\Objects\Basketball_counter (?C_STARTUP)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            DATA    0008H     0011H     UNIT         ?DT?BASKETBALL_COUNTER
-            DATA    0019H     0001H     UNIT         _DATA_GROUP_
-            IDATA   001AH     0001H     UNIT         ?STACK
+            DATA    0008H     000DH     UNIT         ?DT?BASKETBALL_COUNTER
+            IDATA   0015H     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
@@ -34,34 +33,36 @@ LINK MAP OF MODULE:  .\Objects\Basketball_counter (?C_STARTUP)
             CODE    000BH     0003H     ABSOLUTE     
                     000EH     07F2H                  *** GAP ***
             CODE    0800H     008CH     UNIT         ?C_C51STARTUP
-            CODE    088CH     0066H     UNIT         ?PR?DISPLAY?BASKETBALL_COUNTER
-            CODE    08F2H     005AH     UNIT         ?PR?TIME_0?BASKETBALL_COUNTER
-            CODE    094CH     0055H     UNIT         ?C?LIB_CODE
-            CODE    09A1H     0029H     UNIT         ?PR?_DELAYMS?BASKETBALL_COUNTER
-            CODE    09CAH     0010H     UNIT         ?PR?INIT?BASKETBALL_COUNTER
-            CODE    09DAH     0010H     UNIT         ?C_INITSEG
-            CODE    09EAH     000BH     UNIT         ?PR?MAIN?BASKETBALL_COUNTER
+            CODE    088CH     0060H     UNIT         ?PR?DISPLAY?BASKETBALL_COUNTER
+            CODE    08ECH     0060H     UNIT         ?PR?TIME_0?BASKETBALL_COUNTER
+            CODE    094CH     0029H     UNIT         ?PR?SPEAK?BASKETBALL_COUNTER
+            CODE    0975H     0026H     UNIT         ?PR?_DELAYMS?BASKETBALL_COUNTER
+            CODE    099BH     0022H     UNIT         ?C?LIB_CODE
+            CODE    09BDH     0016H     UNIT         ?C_INITSEG
+            CODE    09D3H     0010H     UNIT         ?PR?INIT?BASKETBALL_COUNTER
+            CODE    09E3H     000EH     UNIT         ?PR?MAIN?BASKETBALL_COUNTER
 
 
 
 OVERLAY MAP OF MODULE:   .\Objects\Basketball_counter (?C_STARTUP)
 
 
-SEGMENT                                   DATA_GROUP 
-  +--> CALLED SEGMENT                   START    LENGTH
--------------------------------------------------------
-?C_C51STARTUP                           -----    -----
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
   +--> ?PR?MAIN?BASKETBALL_COUNTER
   +--> ?C_INITSEG
 
-?PR?MAIN?BASKETBALL_COUNTER             -----    -----
+?PR?MAIN?BASKETBALL_COUNTER
   +--> ?PR?INIT?BASKETBALL_COUNTER
   +--> ?PR?DISPLAY?BASKETBALL_COUNTER
+  +--> ?PR?SPEAK?BASKETBALL_COUNTER
 
-?PR?DISPLAY?BASKETBALL_COUNTER          0019H    0001H
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/14/2021  08:43:15  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/14/2021  11:34:33  PAGE 2
 
 
+?PR?DISPLAY?BASKETBALL_COUNTER
   +--> ?PR?_DELAYMS?BASKETBALL_COUNTER
 
 
@@ -73,7 +74,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\Basketball_counter (?C_STARTUP)
 
   -------         MODULE        ?C_STARTUP
   C:0800H         SEGMENT       ?C_C51STARTUP
-  I:001AH         SEGMENT       ?STACK
+  I:0015H         SEGMENT       ?STACK
   C:0000H         PUBLIC        ?C_STARTUP
   D:00E0H         SYMBOL        ACC
   D:00F0H         SYMBOL        B
@@ -111,124 +112,139 @@ SYMBOL TABLE OF MODULE:  .\Objects\Basketball_counter (?C_STARTUP)
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
   B:00A8H.7       PUBLIC        EA
-  C:08F2H         PUBLIC        Time_0
-  C:09EAH         PUBLIC        main
+  C:094CH         PUBLIC        speak
+  B:0090H.4       PUBLIC        BEEP
+  C:08ECH         PUBLIC        Time_0
+  C:09E3H         PUBLIC        main
   D:0089H         PUBLIC        TMOD
-  C:09CAH         PUBLIC        init
+  C:09D3H         PUBLIC        init
   D:0008H         PUBLIC        table0
-  D:0012H         SYMBOL        sec
-  D:0014H         SYMBOL        min
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/14/2021  11:34:33  PAGE 3
+
+
+  D:0012H         PUBLIC        sec
+  D:0013H         PUBLIC        min
   B:00A8H.1       PUBLIC        ET0
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/14/2021  08:43:15  PAGE 3
-
-
   D:008CH         PUBLIC        TH0
   D:008AH         PUBLIC        TL0
   B:0090H.0       PUBLIC        HLA
   B:0090H.1       PUBLIC        HLB
   B:0088H.4       PUBLIC        TR0
   B:0090H.2       PUBLIC        HLC
-  D:0016H         PUBLIC        m
-  D:0017H         SYMBOL        n
-  C:09ACH         PUBLIC        _delayms
+  D:0014H         PUBLIC        m
+  C:097DH         PUBLIC        _delayms
   C:088CH         PUBLIC        display
-  C:09A1H         SYMBOL        L?0022
+  C:0975H         SYMBOL        L?0022
   -------         PROC          L?0021
   -------         ENDPROC       L?0021
-  C:09A1H         SYMBOL        L?0022
+  C:0975H         SYMBOL        L?0022
   -------         PROC          _DELAYMS
   D:0006H         SYMBOL        xms
   -------         DO            
   D:0006H         SYMBOL        i
   D:0004H         SYMBOL        j
   -------         ENDDO         
-  C:09ACH         LINE#         11
-  C:09ACH         LINE#         12
-  C:09ACH         LINE#         14
-  C:09B5H         LINE#         15
-  C:09C9H         LINE#         17
+  C:097DH         LINE#         12
+  C:097DH         LINE#         13
+  C:097DH         LINE#         15
+  C:0986H         LINE#         16
+  C:099AH         LINE#         18
   -------         ENDPROC       _DELAYMS
   -------         PROC          DISPLAY
   -------         DO            
   D:0003H         SYMBOL        secshi
-  D:0019H         SYMBOL        secge
+  D:0001H         SYMBOL        secge
   D:0007H         SYMBOL        minshi
   D:0002H         SYMBOL        minge
   -------         ENDDO         
-  C:088CH         LINE#         19
   C:088CH         LINE#         20
-  C:088CH         LINE#         22
-  C:0899H         LINE#         23
-  C:08A6H         LINE#         24
-  C:08B3H         LINE#         25
-  C:08BEH         LINE#         26
-  C:08C4H         LINE#         27
-  C:08C4H         LINE#         28
-  C:08C7H         LINE#         30
-  C:08CDH         LINE#         31
-  C:08CFH         LINE#         32
-  C:08D2H         LINE#         34
-  C:08D8H         LINE#         35
-  C:08DAH         LINE#         36
-  C:08DDH         LINE#         38
-  C:08E3H         LINE#         39
-  C:08EBH         LINE#         40
+  C:088CH         LINE#         21
+  C:088CH         LINE#         23
+  C:0898H         LINE#         24
+  C:08A1H         LINE#         25
+  C:08ADH         LINE#         26
+  C:08B5H         LINE#         27
+  C:08BBH         LINE#         28
+  C:08BDH         LINE#         29
+  C:08C0H         LINE#         31
+  C:08C6H         LINE#         32
+  C:08C9H         LINE#         33
+  C:08CCH         LINE#         35
+  C:08D2H         LINE#         36
+  C:08D5H         LINE#         37
+  C:08D8H         LINE#         39
+  C:08DEH         LINE#         40
+  C:08E5H         LINE#         41
   -------         ENDPROC       DISPLAY
+  -------         PROC          SPEAK
+  C:094CH         LINE#         45
+  C:094CH         LINE#         46
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/14/2021  11:34:33  PAGE 4
+
+
+  C:094CH         LINE#         47
+  C:0972H         LINE#         48
+  C:0972H         LINE#         49
+  C:0974H         LINE#         52
+  C:0974H         LINE#         53
+  -------         ENDPROC       SPEAK
   -------         PROC          INIT
-  C:09CAH         LINE#         44
-  C:09CAH         LINE#         45
-  C:09CAH         LINE#         46
-  C:09CDH         LINE#         47
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/14/2021  08:43:15  PAGE 4
-
-
-  C:09D0H         LINE#         48
-  C:09D3H         LINE#         49
-  C:09D5H         LINE#         50
-  C:09D7H         LINE#         51
-  C:09D9H         LINE#         52
+  C:09D3H         LINE#         55
+  C:09D3H         LINE#         56
+  C:09D3H         LINE#         57
+  C:09D6H         LINE#         58
+  C:09D9H         LINE#         59
+  C:09DCH         LINE#         60
+  C:09DEH         LINE#         61
+  C:09E0H         LINE#         62
+  C:09E2H         LINE#         63
   -------         ENDPROC       INIT
   -------         PROC          TIME_0
-  C:08F2H         LINE#         55
-  C:08FDH         LINE#         57
-  C:0900H         LINE#         58
-  C:0903H         LINE#         66
-  C:0905H         LINE#         67
-  C:0917H         LINE#         68
-  C:0917H         LINE#         69
-  C:091AH         LINE#         70
-  C:0922H         LINE#         71
-  C:0925H         LINE#         72
-  C:092DH         LINE#         73
-  C:092DH         LINE#         74
-  C:0931H         LINE#         75
-  C:0939H         LINE#         76
-  C:093FH         LINE#         77
-  C:093FH         LINE#         78
-  C:0943H         LINE#         79
-  C:0943H         LINE#         80
-  C:0943H         LINE#         81
-  C:0943H         LINE#         82
+  C:08ECH         LINE#         66
+  C:08F7H         LINE#         68
+  C:08FAH         LINE#         69
+  C:08FDH         LINE#         70
+  C:08FFH         LINE#         71
+  C:0911H         LINE#         72
+  C:0911H         LINE#         73
+  C:0914H         LINE#         74
+  C:0916H         LINE#         75
+  C:0919H         LINE#         76
+  C:092BH         LINE#         77
+  C:092BH         LINE#         78
+  C:092DH         LINE#         79
+  C:0930H         LINE#         80
+  C:093DH         LINE#         81
+  C:093DH         LINE#         82
+  C:0940H         LINE#         83
+  C:0943H         LINE#         84
+  C:0943H         LINE#         85
+  C:0943H         LINE#         86
+  C:0943H         LINE#         87
   -------         ENDPROC       TIME_0
   -------         PROC          MAIN
-  C:09EAH         LINE#         85
-  C:09EAH         LINE#         86
-  C:09EAH         LINE#         87
-  C:09EDH         LINE#         88
-  C:09F0H         LINE#         89
-  C:09F0H         LINE#         90
-  C:09F0H         LINE#         91
-  C:09F3H         LINE#         93
+  C:09E3H         LINE#         90
+  C:09E3H         LINE#         91
+  C:09E3H         LINE#         92
+  C:09E6H         LINE#         93
+  C:09E9H         LINE#         94
+  C:09E9H         LINE#         95
+  C:09E9H         LINE#         96
+  C:09ECH         LINE#         97
+  C:09EFH         LINE#         98
   -------         ENDPROC       MAIN
   -------         ENDMOD        BASKETBALL_COUNTER
 
-  -------         MODULE        ?C?UIDIV
-  C:094CH         PUBLIC        ?C?UIDIV
-  -------         ENDMOD        ?C?UIDIV
+  -------         MODULE        ?C?SCDIV
+  C:099BH         PUBLIC        ?C?SCDIV
+  -------         ENDMOD        ?C?SCDIV
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/14/2021  11:34:33  PAGE 5
+
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0125H BYTE (14%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0154H BYTE (16%) *
 ******************************************************************************
 
-Program Size: data=27.0 xdata=0 code=507
+Program Size: data=22.0 xdata=0 code=503
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
